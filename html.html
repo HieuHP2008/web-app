@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        .red {
+            color: blueviolet;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <form action="" method="post" id="form-1">
+    <!-- nhập email -->
+        <div>
+            <span>nhập email</span>
+            <br>
+            <input type="text" name="input" id="email" placeholder="VD: rollerphan@gmail.com">
+        </div>
+        <div>
+            <span>nhập mật khẩu</span>
+            <br>
+            <input type="text" name="input" id="passwd" placeholder="VD: RollerPhan">
+        </div>
+    <!-- nhập mật khẩu -->
+    </form>
+    <script src="javascript.js"></script>
+    <script>
+        validator({
+            form: '#form-1',
+            rules: [
+                validator.isEmail('#email'),
+                validator.isPasswd('#passwd', 6)
+            ]
+        })
+    </script>
+</body>
+
+
+
+
+</html>

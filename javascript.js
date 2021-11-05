@@ -1,39 +1,44 @@
 function validator (options) {
     formElement = document.querySelector(options.form)
-    if(formElement) {
-       options.rules.forEach(function (rule) {
-           var inputElement = formElement.querySelector(rule.selector)
-           inputElement.onblur = function () {
-               rule.test(inputElement.value)
-           }
-        }) 
-    }
-}
-
-
-        // ĐỊNH NGHĨA CHO RULES //
-// Email
-validator.isEmail = function (selector) {
-    return {
-        selector: selector,
-        test: function (value) {
-            regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return regex.test(value) ? undefined : alert("vui lòng nhập đúng email")
-            
+    options.rules.forEach(function(rule) {
+        inputElement = formElement.querySelector(rule.selector)
+        inputElement.onblur = function() {
+            // lấy ra value trong input: inputElement.value
+            // Lấy ra test trong các rules: rule.test()
+            rule.test(inputElement.value)
         }
-    }
+    })
 }
 
-// Passwd
-validator.isPasswd = function (selector) {
+validator.isUser = function (selector) {
     return {
         selector: selector,
         test: function (value) {
-            regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return regex.test(value) ? undefined : alert("vui lòng nhập đúng mật khẩu")
+            var Regex = /^[a-zA-Z\-]+$/
+            return Regex.test(value) ? undefined : alert("Hãy nhập lại trường này")
             
         }
     }
 }
 
 
+validator.isPasswd = function (selector,min) {
+    return {
+        selector: selector,
+        test: function (value) {
+            var Regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+            if(Regex.test(value)) {
+                return undefined
+            }else {
+                alert("vui lòng nhập mật khẩu có nhưng kí tự đặc biệt")
+            }
+
+            if(value.length >= min) {
+                return undefined
+            }else {
+                alert('vui lòng nhập mật khẩu dài hơn 8 kí tự')
+            }
+
+        }
+    }
+}

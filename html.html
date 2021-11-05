@@ -17,7 +17,7 @@
     
         <!-- nhập username -->
         <div>
-            <span>nhập user</span>
+            <span>nhập username</span>
             <br>
             <input type="text" name="input" id="user" placeholder="VD: RollerPhan">
         </div>
@@ -33,18 +33,24 @@
         <div>
             <span>nhập mật khẩu</span>
             <br>
-            <input type="text" name="input" id="passwd" placeholder="VD: RollerPhan">
+            <input type="password" name="input" id="passwd" placeholder="Hãy nhập mật khẩu">
         </div>
-    
+
+        <!-- nhập lại mật khẩu -->
+        <div>
+            <span>nhập lại mật khẩu</span>
+            <br>
+            <input type="text" name="input" id="conform" placeholder="Hãy nhập lại mật khẩu">
+        </div>
+
     </form>
     <script src="javascript.js"></script>
     <script>
         validator({
             form: '#form-1',
             rules: [
-                validator.isEmail('#email'),
-                validator.isPasswd('#passwd', 6),
                 validator.isUser('#user'),
+                validator.isPasswd('#passwd', 8)
             ]
         })
     </script>
